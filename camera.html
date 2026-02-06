@@ -2,40 +2,49 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Test Camera</title>
+  <title>Kiểm tra Camera</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       background: black;
+      color: white;
       text-align: center;
+      font-family: Arial;
     }
     video {
       width: 100%;
       height: auto;
     }
+    button {
+      font-size: 18px;
+      padding: 12px 20px;
+      margin: 15px;
+    }
   </style>
 </head>
 <body>
 
-  <h3 style="color:white">BƯỚC 1 – KIỂM TRA CAMERA</h3>
+<h2>BƯỚC 2 – KIỂM TRA CAMERA</h2>
 
-  <video id="camera" autoplay playsinline></video>
+<button onclick="startCamera()">MỞ CAMERA</button>
 
-  <script>
-    const video = document.getElementById("camera");
+<video id="video" playsinline autoplay></video>
 
-    navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" },
-      audio: false
-    })
-    .then(stream => {
-      video.srcObject = stream;
-    })
-    .catch(err => {
-      alert("KHÔNG MỞ ĐƯỢC CAMERA: " + err);
-    });
-  </script>
+<script>
+function startCamera() {
+  navigator.mediaDevices.getUserMedia({
+    video: { facingMode: "environment" },
+    audio: false
+  })
+  .then(stream => {
+    document.getElementById("video").srcObject = stream;
+  })
+  .catch(err => {
+    alert("LỖI CAMERA: " + err.name);
+  });
+}
+</script>
 
 </body>
 </html>
