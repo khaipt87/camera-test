@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Camera</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      text-align: center;
+    }
+    video {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h3 style="color:white">BƯỚC 1 – KIỂM TRA CAMERA</h3>
+
+  <video id="camera" autoplay playsinline></video>
+
+  <script>
+    const video = document.getElementById("camera");
+
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+      audio: false
+    })
+    .then(stream => {
+      video.srcObject = stream;
+    })
+    .catch(err => {
+      alert("KHÔNG MỞ ĐƯỢC CAMERA: " + err);
+    });
+  </script>
+
+</body>
+</html>
