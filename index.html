@@ -32,19 +32,19 @@
 <video id="video" playsinline autoplay></video>
 
 <script>
-function startCamera() {
-  navigator.mediaDevices.getUserMedia({
-    video: { facingMode: "environment" },
-    audio: false
-  })
-  .then(stream => {
-    document.getElementById("video").srcObject = stream;
-  })
-  .catch(err => {
-    alert("LỖI CAMERA: " + err.name);
-  });
+async function startCamera() {
+  const video = document.getElementById("video");
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+    video.srcObject = stream;
+  } catch (e) {
+    alert("Không mở được camera: " + e);
+  }
 }
 </script>
 
 </body>
 </html>
+
